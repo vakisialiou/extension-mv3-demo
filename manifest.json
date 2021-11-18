@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "manifest_version": 3,
+  "name": "mv3-demo",
+  "short_name": "mv3-demo",
+  "description": "mv3 service worker broken after auto-update and manual refresh",
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "geolocation",
+    "topSites",
+    "identity",
+    "identity.email",
+    "history",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "mv3-demo"
+  },
+  "chrome_url_overrides": {
+    "newtab": "override.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "font-src 'self'; script-src 'self'; object-src 'self'; worker-src 'self'",
+    "content_scripts": "font-src 'self'; script-src 'self'; object-src 'self'; worker-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["/modules/2048/*", "/assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
